@@ -123,8 +123,6 @@ export class UserDashboardComponent implements OnInit {
           this.formNewBook.get('userid')!.setValue('');
           this.formNewBook.get('bookid')!.setValue('');
           this.alertSucess = true;
-        } else if (!result) {
-          alert("Book cannot find..");
         }
       });
   }
