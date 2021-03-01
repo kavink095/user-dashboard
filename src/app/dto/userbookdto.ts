@@ -1,4 +1,11 @@
+import { empty } from "rxjs";
+
 export class Userbookdto {
-  userid: string = "";
-  bookid: string = "";
+  userbookid: number = 0;
+  txndate: string = '';
+  retdate: string = '';
+  mark: number = 1;
+  rackmark: string = '';
+  userid: string = '';
+  bookrefid: string = '';
 }

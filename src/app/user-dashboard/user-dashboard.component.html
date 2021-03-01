@@ -1,21 +1,22 @@
 <div class="my-4 w-100 col-md-10" id="myChart" width="900" height="380">
   <form [formGroup]="formNewBook">
-    <div class="form-row">
+    <div class="form-row col-md-10">
       <div class="form-group col-md-10">
         <label for="inputUser">USER ID</label>
-        <input type="text" #inputUser formControlName="userid" class="form-control" id="inputUser" placeholder="User RFID"
-          (keyup.enter)="keyuser()" />
+        <input type="text" #inputUser formControlName="userid" class="form-control" id="inputUser"
+          placeholder="User RFID" (keyup.enter)="keyuser()" />
       </div>
       <div class="form-group col-md-10">
         <label for="inputBook">BOOK ID</label>
         <input type="text" #inputBook formControlName="bookid" class="form-control" id="inputBook"
           placeholder="Book RFID" (keyup.enter)="keybook()" />
       </div>
-      </div>
+    </div>
 
-    <button for="inputBtn" type="submit"  #inputBtn [disabled]="!formNewBook.valid" (click)="savedata()" class="btn btn-primary col-md-10">
+    <!-- <button for="inputBtn" type="submit" #inputBtn [disabled]="!formNewBook.valid" (click)="savedata()"
+      class="btn btn-primary col-md-10">
       Next
-    </button>
+    </button> -->
 
   </form>
 </div>
