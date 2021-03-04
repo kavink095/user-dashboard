@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { Userbookdto } from '../dto/userbookdto';
 import { Userbookservice } from '../service/userbookservice';
 
@@ -47,7 +48,12 @@ export class UserDashboardComponent implements OnInit {
 
     if (this.formNewBook.get('userid')?.value.trim().length <= 0) {
       _submitFlg = false;
-      _submitErrorMsg = 'User ID cannot be Empty. Please scan your ID card first ..';
+      Swal.fire({
+        icon: 'question',
+        title: 'Oops...',
+        text: 'User ID cannot be Empty. Please scan your ID card first ..!',
+        footer: 'try again'
+      });
     }
 
     if (_submitFlg) {
@@ -56,11 +62,17 @@ export class UserDashboardComponent implements OnInit {
         (response) => {
           if (response.length != 0 || Validators === null) {
             this.inputElbook.nativeElement.focus();
-            this.alertSucess = true;
+            // this.alertSucess = true;
           } else {
-            _submitErrorMsg = 'This User Not Register user..';
+            Swal.fire({
+              icon: 'question',
+              title: 'Oops...',
+              text: 'Cannot find user.. !',
+              footer: 'try again'
+            });
+            // _submitErrorMsg = 'This User Not Register user..';
             this.formNewBook.get('userid')!.setValue('');
-            alert(_submitErrorMsg);
+            // alert(_submitErrorMsg);
             _submitFlg = false;
 
           }
@@ -79,7 +91,13 @@ export class UserDashboardComponent implements OnInit {
 
     if (this.formNewBook.get('book')?.value.trim().length <= 0) {
       _submitFlg = false;
-      _submitErrorMsg = 'Book ID cannot be Empty. Please scan your book first ..';
+      Swal.fire({
+        icon: 'question',
+        title: 'Oops...',
+        text: 'Book ID cannot be Empty. Please scan your ID card first ..!',
+        footer: 'try again'
+      })
+      // _submitErrorMsg = 'Book ID cannot be Empty. Please scan your book first ..';
     }
     if (_submitFlg) {
       this.book.bookrefid = this.formNewBook.get('bookid')!.value;
@@ -88,11 +106,17 @@ export class UserDashboardComponent implements OnInit {
           if (response.length != 0 || Validators === null) {
             // this.inputElbtn.nativeElement.focus();
             this.savedata();
-            this.alertSucess = true;
+            // this.alertSucess = true;
           } else {
-            _submitErrorMsg = 'Cannot find book..';
+            Swal.fire({
+              icon: 'question',
+              title: 'Oops...',
+              text: 'Please scan book again !',
+              footer: 'try again'
+            });
+            // _submitErrorMsg = '';
             this.formNewBook.get('bookid')!.setValue('');
-            alert(_submitErrorMsg);
+            // alert(_submitErrorMsg);
             _submitFlg = false;
 
           }
@@ -119,11 +143,32 @@ export class UserDashboardComponent implements OnInit {
     this.service.saveData(this.book).subscribe(
       (result) => {
         if (result || !Validators === null) {
-          alert('New Book has been saved successfully !');
+          if (result === 1) {
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: 'you borrowing this book',
+              footer: 'done'
+            });
+          } else if (result === 2) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Remember',
+              text: 'Expire book return Date',
+              footer: 'sorry'
+            });
+          } else if (result === 3) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'you borrowing is limit for this month !',
+              footer: 'sorry'
+            });
+          }
           this.formNewBook.get('userid')!.setValue('');
           this.formNewBook.get('bookid')!.setValue('');
-          this.alertSucess = true;
         }
       });
+    this.inputEluser.nativeElement.focus();
   }
 }

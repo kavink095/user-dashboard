@@ -24,7 +24,7 @@ import { Userbookservice } from './service/userbookservice';
     MDBBootstrapModule.forRoot()
   ],
   providers: [
-      Userbookservice
+    Userbookservice,
   ],
   bootstrap: [AppComponent]
 })

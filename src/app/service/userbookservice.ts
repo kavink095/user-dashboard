@@ -19,8 +19,8 @@ export class Userbookservice {
     constructor(private http: HttpClient) { }
 
     // tslint:disable-next-line: typedef
-    saveData(bookDto: Userbookdto): Observable<boolean> {
-        return this.http.post<boolean>(MAIN_URL + UR1L, bookDto);
+    saveData(bookDto: Userbookdto): Observable<number> {
+        return this.http.post<number>(MAIN_URL + UR1L, bookDto);
     }
 
     checkUser(bookDto: Userbookdto): Observable<string[]> {
