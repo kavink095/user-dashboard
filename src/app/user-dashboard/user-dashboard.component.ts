@@ -164,6 +164,27 @@ export class UserDashboardComponent implements OnInit {
               text: 'you borrowing is limit for this month !',
               footer: 'sorry'
             });
+          } else if (result === 4) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'this book cannot borrow, please meet admin !',
+              footer: 'sorry'
+            });
+          } else if (result === 5) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'this book you borrowed !',
+              footer: 'sorry'
+            });
+          } else if (result === 0) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Try Again !',
+              footer: 'sorry'
+            });
           }
           this.formNewBook.get('userid')!.setValue('');
           this.formNewBook.get('bookid')!.setValue('');
